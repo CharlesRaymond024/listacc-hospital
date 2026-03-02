@@ -1,6 +1,6 @@
 import { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import api from "../api/axios";
+import api from "../../api/axios";
 import { ToastContainer, toast } from "react-toastify";
 import AuthContext from "../../providers/AuthProvider";
 import loginImage from "../../assets/images/loginpic.jpg";

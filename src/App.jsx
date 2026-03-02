@@ -10,6 +10,8 @@ import Services from "./components/pages/Services";
 import "react-toastify/dist/ReactToastify.css";
 import Page404 from "./components/auth/Page404";
 import RequireAuth from "./components/auth/RequireAuth";
+import AdminPatient from "./components/admin/AdminPatient";
+import AdminDoctor from "./components/admin/AdminDoctor";
 
 function App() {
   return (
@@ -26,6 +28,8 @@ function App() {
       <Route element={<RequireAuth role="Admin" />}>
         <Route path="/admin" element={<AdminDashboardLayout />}>
           <Route index element={<AdminDashboard />} />
+          <Route path="/admin/patients" element={<AdminPatient />} />
+          <Route path="/admin/doctors" element={<AdminDoctor />} />
         </Route>
       </Route>
 

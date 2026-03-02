@@ -1,6 +1,7 @@
 import { Outlet } from "react-router-dom";
 import { useContext } from "react";
 import AuthContext from "../../providers/AuthProvider";
+import { NavLink } from "react-router-dom";
 
 const AdminDashboardLayout = () => {
   const { auth } = useContext(AuthContext);
@@ -31,15 +32,55 @@ const AdminDashboardLayout = () => {
       </header>
 
       {/* Body Section */}
+      {/* Body Section */}
       <div className="flex flex-1 pt-16">
         {/* Sidebar */}
-        <aside className="w-64 bg-white shadow-lg">
+        <aside className="w-64 bg-black shadow-lg">
           <ul className="flex flex-col p-6 gap-6 font-medium text-gray-700">
-            <li className="hover:text-blue-600 cursor-pointer">Overview</li>
-            <li className="hover:text-blue-600 cursor-pointer">Patients</li>
-            <li className="hover:text-blue-600 cursor-pointer">Appointments</li>
-            <li className="hover:text-blue-600 cursor-pointer">Doctors</li>
-            <li className="hover:text-blue-600 cursor-pointer">Nurses</li>
+            <NavLink
+              to="/admin"
+              className={({ isActive }) =>
+                `cursor-pointer hover:bg-blue-500 hover:text-white rounded px-4 py-3 transition duration-500 ${isActive ? "text-blue-600 font-semibold" : ""}`
+              }
+            >
+              <li>Overview</li>
+            </NavLink>
+
+            <NavLink
+              to="/admin/patients"
+              className={({ isActive }) =>
+                `cursor-pointer hover:bg-blue-500 hover:text-white rounded px-4 py-3 transition duration-500 ${isActive ? "text-blue-600 font-semibold" : ""}`
+              }
+            >
+              <li>Patients</li>
+            </NavLink>
+
+            <NavLink
+              to="/admin/appointments"
+              className={({ isActive }) =>
+                `cursor-pointer hover:bg-blue-500 hover:text-white rounded px-4 py-3 transition duration-500 ${isActive ? "text-blue-600 font-semibold" : ""}`
+              }
+            >
+              <li>Appointments</li>
+            </NavLink>
+
+            <NavLink
+              to="/admin/doctors"
+              className={({ isActive }) =>
+                `cursor-pointer hover:bg-blue-500 hover:text-white rounded px-4 py-3 transition duration-500 ${isActive ? "text-blue-600 font-semibold" : ""}`
+              }
+            >
+              <li>Doctors</li>
+            </NavLink>
+
+            <NavLink
+              to="/admin/nurses"
+              className={({ isActive }) =>
+                `cursor-pointer hover:bg-blue-500 hover:text-white rounded px-4 py-3 transition duration-500 ${isActive ? "text-blue-600 font-semibold" : ""}`
+              }
+            >
+              <li>Nurses</li>
+            </NavLink>
           </ul>
         </aside>
 
