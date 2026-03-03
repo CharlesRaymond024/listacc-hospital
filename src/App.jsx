@@ -8,6 +8,8 @@ import AdminDashboardLayout from "./components/admin/AdminLayout";
 import About from "./components/pages/AboutUs";
 import Services from "./components/pages/Services";
 import "react-toastify/dist/ReactToastify.css";
+import Page404 from "./components/auth/Page404";
+import RequireAuth from "./components/auth/RequireAuth";
 
 function App() {
   return (
@@ -21,11 +23,14 @@ function App() {
       </Route>
 
       {/* Admin routes */}
-      <Route path="/admin" element={<AdminDashboardLayout />}>
-        <Route index element={<AdminDashboard />} />
+      <Route element={<RequireAuth role="Admin" />}>
+        <Route path="/admin" element={<AdminDashboardLayout />}>
+          <Route index element={<AdminDashboard />} />
+        </Route>
       </Route>
 
       {/* Static pages */}
+      <Route path="*" element={<Page404 />} />
     </Routes>
   );
 }
