@@ -3,28 +3,29 @@ import { useContext } from "react";
 import AuthContext from "../../providers/AuthProvider";
 import LoaddingGif from "../../assets/spinner.gif";
 import { useNavigate } from "react-router-dom";
-const AdminPatient = () => {
-  const { auth } = useContext(AuthContext);
-  const navigate = useNavigate()
-  const url = "/patient";
-  const { data, loading, error } = useFetch(url, auth?.accessToken);
-  console.log(data);
 
-  const handlePatientDetails = (id) => {
-    navigate(`/admin/patients/${id}`)
-  }
+const AdminNurse = () => {
+  const { auth } = useContext(AuthContext);
+  const navigate = useNavigate();
+  const url = "/nurse";
+
+  const { data, loading, error } = useFetch(url, auth?.accessToken);
+    console.log(data);
+
+  const handleNurseDetails = (id) => {
+    navigate(`/admin/nurses/${id}`);
+  };
+
   return (
     <div className="p-6">
       <h1 className="text-2xl font-semibold text-gray-800 mb-6">
-        Admin Patient Management
+        Admin Nurse Management
       </h1>
 
       <div className="bg-white shadow-md rounded-xl p-6">
         {/* Error */}
         {error && (
-          <p className="text-red-500 font-medium mb-4">
-            Error Loading Patients
-          </p>
+          <p className="text-red-500 font-medium mb-4">Error Loading Nurses</p>
         )}
 
         {/* Loading */}
@@ -43,31 +44,31 @@ const AdminPatient = () => {
                   <th className="p-3">S/N</th>
                   <th className="p-3">First Name</th>
                   <th className="p-3">Last Name</th>
+                  <th className="p-3">Station</th>
                   <th className="p-3">Phone No.</th>
-                  <th className="p-3">Status</th>
+                  <th className="p-3">Type</th>
                   <th className="p-3">Actions</th>
                 </tr>
               </thead>
 
               <tbody>
-                {data?.patients.map((patient, index) => (
+                {data?.nurses?.map((nurse, index) => (
                   <tr
-                    key={patient._id || index}
+                    key={nurse._id || index}
                     className="border-b hover:bg-gray-50 transition"
                   >
                     <td className="p-3">{index + 1}</td>
-                    <td className="p-3">{patient.firstname}</td>
-                    <td className="p-3">{patient.lastname}</td>
-                    <td className="p-3">{patient.phone}</td>
-
-                    <td className="p-3">
-                      <span className="px-3 py-1 text-sm rounded-full bg-green-100 text-green-600">
-                        {patient.status}
-                      </span>
-                    </td>
+                    <td className="p-3">{nurse.firstname}</td>
+                    <td className="p-3">{nurse.lastname}</td>
+                    <td className="p-3">{nurse.station}</td>
+                    <td className="p-3">{nurse.phone}</td>
+                    <td className="p-3">{nurse.type}</td>
 
                     <td className="p-3 flex gap-2">
-                      <button onClick={() => handlePatientDetails (patient._id)} className="bg-blue-500 hover:bg-blue-600 text-white text-sm px-3 py-1 rounded">
+                      <button
+                        onClick={() => handleNurseDetails(nurse._id)}
+                        className="bg-blue-500 hover:bg-blue-600 text-white text-sm px-3 py-1 rounded"
+                      >
                         View
                       </button>
 
@@ -90,4 +91,4 @@ const AdminPatient = () => {
   );
 };
 
-export default AdminPatient;
+export default AdminNurse;

@@ -12,6 +12,12 @@ import Page404 from "./components/auth/Page404";
 import RequireAuth from "./components/auth/RequireAuth";
 import AdminPatient from "./components/admin/AdminPatient";
 import AdminDoctor from "./components/admin/AdminDoctor";
+import AdminPatientDetails from "./components/admin/AdminPatientDetails";
+import AdminDoctorDetails from "./components/admin/AdminDoctorDetails";
+import AdminAppointment from "./components/admin/AdminAppointment";
+import AdminNurse from "./components/admin/AdminNurse";
+import AdminNurseDetails from "./components/admin/AdminNurseDetails";
+import AdminAppointmentDetails from "./components/admin/AdminAppointmentDetails";
 
 function App() {
   return (
@@ -30,6 +36,12 @@ function App() {
           <Route index element={<AdminDashboard />} />
           <Route path="/admin/patients" element={<AdminPatient />} />
           <Route path="/admin/doctors" element={<AdminDoctor />} />
+          <Route path="/admin/appointments" element={<AdminAppointment />} />
+          <Route path="/admin/nurses" element={<AdminNurse />} />
+          <Route path="/admin/patients/:id" element={<AdminPatientDetails />} />
+          <Route path="/admin/doctors/:id" element={<AdminDoctorDetails />} />
+          <Route path="/admin/appointments/:id" element={<AdminAppointmentDetails />} />
+          <Route path="/admin/nurses/:id" element={<AdminNurseDetails />} />
         </Route>
       </Route>
 

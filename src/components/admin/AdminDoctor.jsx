@@ -2,14 +2,19 @@ import { useFetch } from "../../hooks/useFetch";
 import { useContext } from "react";
 import AuthContext from "../../providers/AuthProvider";
 import LoaddingGif from "../../assets/spinner.gif";
+import { useNavigate } from "react-router-dom";
 
 const AdminDoctor = () => {
   const { auth } = useContext(AuthContext);
+  const navigate = useNavigate();
   const url = "/doctor";
   const { data, loading, error } = useFetch(url, auth?.accessToken);
 
   console.log(data);
 
+  const handlePatientDetails = (id) => {
+    navigate(`/admin/doctors/${id}`);
+  };
   return (
     <div className="p-6">
       <h1 className="text-2xl font-semibold text-gray-800 mb-6">
@@ -58,13 +63,19 @@ const AdminDoctor = () => {
                     <td className="p-3">{doctor.phone}</td>
 
                     <td className="p-3">
-                      <span className="px-3 py-1 text-sm rounded-full bg-green-100 text-green-600">
-                        {doctor.status}
-                      </span>
+                      {doctor.status === "Active" ? (
+                        <span className="px-3 py-1 text-sm rounded-full bg-green-100 text-green-600">
+                          Active
+                        </span>
+                      ) : (
+                        <span className="px-3 py-1 text-sm rounded-full bg-red-100 text-red-600">
+                          Inactive
+                        </span>
+                      )}
                     </td>
 
                     <td className="p-3 flex gap-2">
-                      <button className="bg-blue-500 hover:bg-blue-600 text-white text-sm px-3 py-1 rounded">
+                      <button onClick={() => handlePatientDetails (doctor._id)} className="bg-blue-500 hover:bg-blue-600 text-white text-sm px-3 py-1 rounded">
                         View
                       </button>
 

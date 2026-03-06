@@ -3,27 +3,31 @@ import { useContext } from "react";
 import AuthContext from "../../providers/AuthProvider";
 import LoaddingGif from "../../assets/spinner.gif";
 import { useNavigate } from "react-router-dom";
-const AdminPatient = () => {
-  const { auth } = useContext(AuthContext);
-  const navigate = useNavigate()
-  const url = "/patient";
-  const { data, loading, error } = useFetch(url, auth?.accessToken);
-  console.log(data);
 
-  const handlePatientDetails = (id) => {
-    navigate(`/admin/patients/${id}`)
-  }
+const AdminAppointment = () => {
+  const { auth } = useContext(AuthContext);
+  const navigate = useNavigate();
+  const url = "/appointment";
+
+  const { data, loading, error } = useFetch(url, auth?.accessToken);
+    console.log(data);
+
+  const handleAppointmentDetails = (id) => {
+    navigate(`/admin/appointments/${id}`);
+  };
+
   return (
     <div className="p-6">
+      {/* Title */}
       <h1 className="text-2xl font-semibold text-gray-800 mb-6">
-        Admin Patient Management
+        Admin Appointment Management
       </h1>
 
       <div className="bg-white shadow-md rounded-xl p-6">
         {/* Error */}
         {error && (
           <p className="text-red-500 font-medium mb-4">
-            Error Loading Patients
+            Error Loading Appointments
           </p>
         )}
 
@@ -41,33 +45,44 @@ const AdminPatient = () => {
               <thead className="bg-gray-100 text-left">
                 <tr className="text-gray-600 text-sm uppercase">
                   <th className="p-3">S/N</th>
-                  <th className="p-3">First Name</th>
-                  <th className="p-3">Last Name</th>
-                  <th className="p-3">Phone No.</th>
-                  <th className="p-3">Status</th>
+                  <th className="p-3">Patient</th>
+                  <th className="p-3">Doctor</th>
+                  
+                  <th className="p-3">Reason</th>
                   <th className="p-3">Actions</th>
                 </tr>
               </thead>
 
               <tbody>
-                {data?.patients.map((patient, index) => (
+                {data?.appointments?.map((appointment, index) => (
                   <tr
-                    key={patient._id || index}
+                    key={appointment._id || index}
                     className="border-b hover:bg-gray-50 transition"
                   >
                     <td className="p-3">{index + 1}</td>
-                    <td className="p-3">{patient.firstname}</td>
-                    <td className="p-3">{patient.lastname}</td>
-                    <td className="p-3">{patient.phone}</td>
 
                     <td className="p-3">
-                      <span className="px-3 py-1 text-sm rounded-full bg-green-100 text-green-600">
-                        {patient.status}
-                      </span>
+                      {appointment?.patient?.firstname}{" "}
+                      {appointment?.patient?.lastname}
                     </td>
 
+                    <td className="p-3">
+                      {appointment?.doctor?.firstname}{" "}
+                      {appointment?.doctor?.lastname}
+                    </td>
+
+                    
+
+                    <td className="p-3">{appointment?.reason}</td>
+
+                    {/* Actions */}
                     <td className="p-3 flex gap-2">
-                      <button onClick={() => handlePatientDetails (patient._id)} className="bg-blue-500 hover:bg-blue-600 text-white text-sm px-3 py-1 rounded">
+                      <button
+                        onClick={() =>
+                          handleAppointmentDetails(appointment._id)
+                        }
+                        className="bg-blue-500 hover:bg-blue-600 text-white text-sm px-3 py-1 rounded"
+                      >
                         View
                       </button>
 
@@ -90,4 +105,4 @@ const AdminPatient = () => {
   );
 };
 
-export default AdminPatient;
+export default AdminAppointment;
