@@ -3,16 +3,17 @@ import { useContext } from "react";
 import AuthContext from "../../providers/AuthProvider";
 import LoaddingGif from "../../assets/spinner.gif";
 import { useNavigate } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 const AdminPatient = () => {
   const { auth } = useContext(AuthContext);
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const url = "/patient";
   const { data, loading, error } = useFetch(url, auth?.accessToken);
   console.log(data);
 
   const handlePatientDetails = (id) => {
-    navigate(`/admin/patients/${id}`)
-  }
+    navigate(`/admin/patients/${id}`);
+  };
   return (
     <div className="p-6">
       <h1 className="text-2xl font-semibold text-gray-800 mb-6">
@@ -33,6 +34,15 @@ const AdminPatient = () => {
             <img src={LoaddingGif} alt="Loading..." className="w-16 h-16" />
           </div>
         )}
+
+        <div className="flex justify-start">
+          <NavLink
+            to="/admin/patient/create"
+            className="bg-green-500 hover:bg-blue-600 hover:text-white text-white text-sm px-4 py-2 rounded mb-4 transition duration-500"
+          >
+            Create New Patient
+          </NavLink>
+        </div>
 
         {/* Table */}
         {data && (
@@ -67,7 +77,10 @@ const AdminPatient = () => {
                     </td>
 
                     <td className="p-3 flex gap-2">
-                      <button onClick={() => handlePatientDetails (patient._id)} className="bg-blue-500 hover:bg-blue-600 text-white text-sm px-3 py-1 rounded">
+                      <button
+                        onClick={() => handlePatientDetails(patient._id)}
+                        className="bg-blue-500 hover:bg-blue-600 text-white text-sm px-3 py-1 rounded"
+                      >
                         View
                       </button>
 

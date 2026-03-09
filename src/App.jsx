@@ -18,6 +18,7 @@ import AdminAppointment from "./components/admin/AdminAppointment";
 import AdminNurse from "./components/admin/AdminNurse";
 import AdminNurseDetails from "./components/admin/AdminNurseDetails";
 import AdminAppointmentDetails from "./components/admin/AdminAppointmentDetails";
+import CreatePatient from "./components/admin/CreatePatient";
 
 function App() {
   return (
@@ -42,6 +43,7 @@ function App() {
           <Route path="/admin/doctors/:id" element={<AdminDoctorDetails />} />
           <Route path="/admin/appointments/:id" element={<AdminAppointmentDetails />} />
           <Route path="/admin/nurses/:id" element={<AdminNurseDetails />} />
+          <Route path="/admin/patient/create" element={<CreatePatient />} />
         </Route>
       </Route>
 
