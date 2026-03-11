@@ -12,7 +12,7 @@ const AdminDoctor = () => {
 
   console.log(data);
 
-  const handlePatientDetails = (id) => {
+  const handleDoctorsDetails = (id) => {
     navigate(`/admin/doctors/${id}`);
   };
   return (
@@ -34,6 +34,15 @@ const AdminDoctor = () => {
           </div>
         )}
 
+        <div className="mb-6">
+          <button
+            onClick={() => navigate("/admin/doctor/create")}
+            className="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-lg font-medium"
+          >
+            Add Doctor
+          </button>
+        </div>
+
         {/* Table */}
         {data && (
           <div className="overflow-x-auto">
@@ -51,7 +60,7 @@ const AdminDoctor = () => {
               </thead>
 
               <tbody>
-                {data?.doctors.map((doctor, index) => (
+                {data?.doctors?.map((doctor, index) => (
                   <tr
                     key={doctor._id || index}
                     className="border-b hover:bg-gray-50 transition"
@@ -75,7 +84,10 @@ const AdminDoctor = () => {
                     </td>
 
                     <td className="p-3 flex gap-2">
-                      <button onClick={() => handlePatientDetails (doctor._id)} className="bg-blue-500 hover:bg-blue-600 text-white text-sm px-3 py-1 rounded">
+                      <button
+                        onClick={() => handleDoctorsDetails(doctor._id)}
+                        className="bg-blue-500 hover:bg-blue-600 text-white text-sm px-3 py-1 rounded"
+                      >
                         View
                       </button>
 

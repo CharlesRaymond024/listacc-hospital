@@ -10,7 +10,7 @@ const AdminNurse = () => {
   const url = "/nurse";
 
   const { data, loading, error } = useFetch(url, auth?.accessToken);
-    console.log(data);
+  console.log(data);
 
   const handleNurseDetails = (id) => {
     navigate(`/admin/nurses/${id}`);
@@ -34,6 +34,15 @@ const AdminNurse = () => {
             <img src={LoaddingGif} alt="Loading..." className="w-16 h-16" />
           </div>
         )}
+
+        <div className="mb-6">
+          <button
+            onClick={() => navigate("/admin/nurse/create")}
+            className="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-lg font-medium"
+          >
+            Add Nurse
+          </button>
+        </div>
 
         {/* Table */}
         {data && (

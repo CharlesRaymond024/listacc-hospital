@@ -38,6 +38,15 @@ const AdminAppointment = () => {
           </div>
         )}
 
+        <div className="mb-6">
+          <button
+            onClick={() => navigate("/admin/appointment/create")}
+            className="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-lg font-medium"
+          >
+            Add Appointment
+          </button>
+        </div>
+
         {/* Table */}
         {data && (
           <div className="overflow-x-auto">
