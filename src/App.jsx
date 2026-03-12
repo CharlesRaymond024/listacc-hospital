@@ -22,6 +22,10 @@ import CreatePatient from "./components/admin/CreatePatient";
 import CreateDoctor from "./components/admin/CreateDoctor";
 import CreateNurse from "./components/admin/CreateNurse";
 import CreateAppointment from "./components/admin/CreateAppointment";
+import DoctorLayout from "./components/doctor/DoctorLayout";
+import DoctorDashBoard from "./components/doctor/DoctorDashBoard";
+import NurseLayout from "./components/nurse/NurseLayout";
+import NurseDashBoard from "./components/nurse/NurseDashBoard";
 
 function App() {
   return (
@@ -51,6 +55,20 @@ function App() {
           <Route path="/admin/nurse/create" element={<CreateNurse />} />
           <Route path="/admin/appointment/create" element={<CreateAppointment />} />
 
+        </Route>
+      </Route>
+
+      {/* Doctor routes */}
+      <Route element={<RequireAuth role="Doctor" />}>
+        <Route path="/doctor" element={<DoctorLayout />}>
+          <Route index element={<DoctorDashBoard />} />
+        </Route>
+      </Route>
+
+      {/* Nurse routes */}
+      <Route element={<RequireAuth role="Nurse" />}>
+        <Route path="/nurse" element={<NurseLayout />}>
+          <Route index element={<NurseDashBoard />} />
         </Route>
       </Route>
 
