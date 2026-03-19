@@ -1,5 +1,5 @@
 import { useFetch } from "../../hooks/useFetch";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import AuthContext from "../../providers/AuthProvider";
 import LoaddingGif from "../../assets/spinner.gif";
 import { useNavigate } from "react-router-dom";
@@ -7,13 +7,37 @@ import { useNavigate } from "react-router-dom";
 const AdminAppointment = () => {
   const { auth } = useContext(AuthContext);
   const navigate = useNavigate();
-  const url = "/appointment";
+  const [page, setPage] = useState(1);
+  const [totalPage, setTotalPage] = useState(1);
+  const [limit, setLimit] = useState(10);
+  const url = `/appointment?page=${page}&limit=${limit}`;
 
   const { data, loading, error } = useFetch(url, auth?.accessToken);
     console.log(data);
 
   const handleAppointmentDetails = (id) => {
     navigate(`/admin/appointments/${id}`);
+  };
+
+  const handleNextPage = () => {
+    if (data) {
+      if (data.totalPage === data.page) {
+        return;
+      } else {
+        setPage(() => page + 1);
+      }
+    }
+    return;
+  };
+  const handlePreviousPage = () => {
+    if (data) {
+      if (data.page <= 1) {
+        return;
+      } else {
+        setPage(() => page - 1);
+      }
+    }
+    return;
   };
 
   return (
@@ -107,6 +131,21 @@ const AdminAppointment = () => {
                 ))}
               </tbody>
             </table>
+            <div className="flex justify-between items-center mt-4">
+              <button
+                onClick={handlePreviousPage}
+                className="px-4 py-2 rounded bg-gray-700 text-white text-sm hover:bg-gray-800 transition"
+              >
+                Previous
+              </button>
+
+              <button
+                onClick={handleNextPage}
+                className="px-4 py-2 rounded bg-blue-500 text-white text-sm hover:bg-blue-600 transition"
+              >
+                Next
+              </button>
+            </div>
           </div>
         )}
       </div>
